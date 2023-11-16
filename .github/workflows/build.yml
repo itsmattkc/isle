@@ -48,14 +48,14 @@ jobs:
       with:
         msystem: MINGW32
         update: true
-        install: mingw-w64-i686-gcc mingw-w64-i686-cmake
+        install: mingw-w64-i686-gcc mingw-w64-i686-cmake mingw-w64-i686-ninja
 
     - name: Build
       shell: msys2 {0}
       run: |
         mkdir build
         cd build
-        cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -G "Unix Makefiles"
+        cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -G "Ninja"
         cmake --build .
 
     # - name: Upload Artifact
