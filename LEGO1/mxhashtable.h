@@ -156,7 +156,7 @@ void MxHashTable<T>::DeleteAll()
 
 		while (t) {
 			MxHashTableNode<T>* next = t->m_next;
-			m_customDestructor(t->m_obj);
+			this->m_customDestructor(t->m_obj);
 			delete t;
 			t = next;
 		}
