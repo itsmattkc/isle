@@ -16,7 +16,7 @@ public:
 		MxBool has_next = (this->m_first != NULL);
 		if (this->m_first) {
 			p_obj = this->m_first->GetValue();
-			_DeleteEntry(this->m_first);
+			this->_DeleteEntry(this->m_first);
 		}
 
 		return has_next;
