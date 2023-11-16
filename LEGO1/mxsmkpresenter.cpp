@@ -74,12 +74,12 @@ void MxSmkPresenter::Destroy()
 }
 
 // OFFSET: LEGO1 0x100b3940 STUB
-void MxSmkPresenter::VTable0x5c(undefined4 p_unknown1)
+void MxSmkPresenter::VTable0x5c(MxStreamChunk* p_chunk)
 {
 }
 
 // OFFSET: LEGO1 0x100b3a00 STUB
-void MxSmkPresenter::VTable0x68(undefined4 p_unknown1)
+void MxSmkPresenter::VTable0x68(MxStreamChunk* p_chunk)
 {
 }
 
