@@ -213,6 +213,11 @@ add_library(lego1 SHARED
 )
 if (MINGW)
   target_compile_definitions(lego1 PRIVATE DIRECTINPUT_VERSION=0x0500)
+  target_compile_options(lego1 PRIVATE
+    # GCC will complain about using NULL instead of nullptr, but MSVC420 has no
+    # nullptr so we cannot use it
+    -Wno-conversion-null
+  )
 endif()
 
 # Additional include directories
