@@ -44,11 +44,15 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - uses: msys2/setup-msys2@v2
+      with:
+        msystem: MINGW32
+        update: true
+        install: mingw-w64-i686-toolchain
+
     - name: Build
       shell: bash
       run: |
-        PATH=C:\msys64\mingw32\bin:C:\msys64\usr\bin:$PATH
-        pacman --noconfirm --needed -S mingw-w64-i686-toolchain
         mkdir build
         cd build
         cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -G "Unix Makefiles"
