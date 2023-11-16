@@ -27,9 +27,9 @@ public:
 	}
 
 	virtual void Destroy() override;
-	virtual void VTable0x5c(undefined4 p_unknown1) override;
+	virtual void VTable0x5c(MxStreamChunk* p_chunk) override;
 	virtual void VTable0x60() override;
-	virtual void VTable0x68(undefined4 p_unknown1) override; // vtable+0x68
+	virtual void VTable0x68(MxStreamChunk* p_chunk) override; // vtable+0x68
 	virtual void VTable0x70() override;
 	virtual MxU32 VTable0x88();
 
