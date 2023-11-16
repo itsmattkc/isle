@@ -23,10 +23,10 @@ jobs:
     - name: Build
       shell: cmd
       run: |
-        #call .\msvc420\bin\VCVARS32.BAT x86
+        call .\msvc420\bin\VCVARS32.BAT x86
         mkdir build
         cd build
-        cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -G "Unix Makefiles"
+        cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -G "NMake Makefiles"
         cmake --build .
 
     - name: Upload Artifact
@@ -47,10 +47,10 @@ jobs:
     - name: Build
       shell: bash
       run: |
-        PATH=C:\msys64\mingw32\bin:C:\msys64\usr\bin:$PATH
+        #PATH=C:\msys64\mingw32\bin:C:\msys64\usr\bin:$PATH
         mkdir build
         cd build
-        cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -G Ninja
+        cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -G "Unix Makefiles"
 
     # - name: Upload Artifact
     #   uses: actions/upload-artifact@master
