@@ -44,6 +44,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Set up MinGW
+      uses: egor-tensin/setup-mingw@v2
+      with:
+        platform: x86
+
     - name: Build
       shell: bash
       run: |
