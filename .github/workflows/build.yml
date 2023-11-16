@@ -38,6 +38,28 @@ jobs:
           build/ISLE.PDB
           build/LEGO1.DLL
           build/LEGO1.PDB
+
+  build_gcc:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Build
+      shell: bash
+      run: |
+        mkdir build
+        cd build
+        cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -G Ninja
+
+    # - name: Upload Artifact
+    #   uses: actions/upload-artifact@master
+    #   with:
+    #     name: Win32
+    #     path: |
+    #       build/ISLE.EXE
+    #       build/ISLE.PDB
+    #       build/LEGO1.DLL
+    #       build/LEGO1.PDB
           
   compare:
     needs: build
