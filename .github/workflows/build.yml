@@ -23,10 +23,10 @@ jobs:
     - name: Build
       shell: cmd
       run: |
-        call .\msvc420\bin\VCVARS32.BAT x86
+        #call .\msvc420\bin\VCVARS32.BAT x86
         mkdir build
         cd build
-        cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -G "NMake Makefiles"
+        cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -G "Unix Makefiles"
         cmake --build .
 
     - name: Upload Artifact
