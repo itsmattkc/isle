@@ -215,8 +215,12 @@ if (MINGW)
   target_compile_definitions(lego1 PRIVATE DIRECTINPUT_VERSION=0x0500)
   target_compile_options(lego1 PRIVATE
     # GCC will complain about using NULL instead of nullptr, but MSVC420 has no
-    # nullptr so we cannot use it
+    # nullptr so we cannot use it.
     -Wno-conversion-null
+
+    # MSVC (and hence LEGO Island's code) breaks a lot of standards that GCC
+    # will complain about unless we tell it to allow those things.
+    -fpermissive
   )
 endif()
 
