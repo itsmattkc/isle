@@ -25,6 +25,10 @@ class MxAtomId;
 class MxBackgroundAudioManager;
 class MxDSFile;
 class MxTransitionManager;
+class MxVariable;
+
+template <class T>
+class MxList;
 
 extern MxAtomId* g_copterScript;
 extern MxAtomId* g_dunecarScript;
@@ -113,11 +117,13 @@ public:
 	MxDSAction& GetCurrentAction() { return m_action; }
 
 private:
+	inline MxVariable* SetUpVariable(MxVariable *p_var);
+
 	undefined4 m_unk68;
 	undefined4 m_unk6c;
 	LegoInputManager* m_inputMgr; // 0x70
 	GifManager* m_gifManager;
-	undefined4 m_unk78;
+	MxList<undefined4> *m_unk78;
 	LegoWorld* m_currentWorld;
 	MxBool m_unk80;
 	LegoNavController* m_navController; // 0x84

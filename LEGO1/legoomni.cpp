@@ -18,6 +18,7 @@
 #include "mxomnicreateparam.h"
 #include "mxticklemanager.h"
 #include "mxtransitionmanager.h"
+#include "mxvariablestatic.h"
 
 // 0x100f451c
 MxAtomId* g_copterScript = NULL;
@@ -236,6 +237,13 @@ LegoEntity* PickEntity(MxLong, MxLong)
 	return NULL;
 }
 
+// OFFSET: LEGO1 0x1005a5f0 STUB
+MxResult FUN_1005a5f0()
+{
+	// FIXME: STUB
+	return SUCCESS;
+}
+
 // OFFSET: LEGO1 0x100528e0
 void RegisterScripts()
 {
@@ -378,6 +386,31 @@ void LegoOmni::Destroy()
 	// TODO
 }
 
+// Only ever inlined
+/*template <class T>
+inline MxVariable *CreateVariable(LegoOmni *p_omni, T *huh = NULL)
+{
+	if (var = new T()) {
+		p_omni->VariableTable()->SetVariable(var);
+	} else {
+		var = NULL;
+	}
+
+	return var;
+}*/
+
+// Always inlined
+MxVariable *LegoOmni::SetUpVariable(MxVariable *p_var)
+{
+	if (p_var) {
+		m_variableTable->SetVariable(p_var);
+	} else {
+		p_var = NULL;
+	}
+
+	return p_var;
+}
+
 // OFFSET: LEGO1 0x10058e70
 MxResult LegoOmni::Create(MxOmniCreateParam& p)
 {
@@ -421,28 +454,41 @@ MxResult LegoOmni::Create(MxOmniCreateParam& p)
 		}
 	}
 
-	// TODO: there are a few more classes here
+	// ClassC -> 0x6c
+	
 	m_gifManager = new GifManager();
+
+	// ClassA_D -> 0x8c
+
 	m_plantManager = new LegoPlantManager();
 	m_animationManager = new LegoAnimationManager();
 	m_buildingManager = new LegoBuildingManager();
 	m_gameState = new LegoGameState();
-	// TODO: initialize list at m_unk78
+
+	if (!(m_unk78 = new MxList<undefined4>())) {
+		m_unk78 = NULL;
+	}
 
 	if (m_unk6c && m_gifManager && m_unk78 && m_plantManager && m_animationManager && m_buildingManager) {
-		// TODO: initialize a bunch of MxVariables
-		RegisterScripts();
-		FUN_1001a700();
-		// todo: another function call. in legoomni maybe?
-		m_bkgAudioManager = new MxBackgroundAudioManager();
-		if (m_bkgAudioManager != NULL) {
-			m_transitionManager = new MxTransitionManager();
-			if (m_transitionManager != NULL) {
-				if (m_transitionManager->GetDDrawSurfaceFromVideoManager() == SUCCESS) {
-					m_notificationManager->Register(this);
-					SetAppCursor(1);
-					m_gameState->SetSomeEnumState(0);
-					return SUCCESS;
+		if (SetUpVariable(new VisibilityVariable())
+			&& SetUpVariable(new CameraLocationVariable())
+			&& SetUpVariable(new CursorVariable())
+			&& SetUpVariable(new WhoAmIVariable())) {
+			RegisterScripts();
+			FUN_1001a700();
+
+			if (FUN_1005a5f0() == SUCCESS) {
+				m_bkgAudioManager = new MxBackgroundAudioManager();
+				if (m_bkgAudioManager != NULL) {
+					m_transitionManager = new MxTransitionManager();
+					if (m_transitionManager != NULL) {
+						if (m_transitionManager->GetDDrawSurfaceFromVideoManager() == SUCCESS) {
+							m_notificationManager->Register(this);
+							SetAppCursor(1);
+							m_gameState->SetSomeEnumState(0);
+							return SUCCESS;
+						}
+					}
 				}
 			}
 		}

@@ -51,19 +51,19 @@ public:
 	inline GifData* Get(const char* name) { return m_unk8.Get(name); }
 
 protected:
-	undefined4 m_unk0;
 	undefined4 m_unk4;
 	GifMap m_unk8;
 };
 
 // VTABLE 0x100d86fc
+// SIZE 0x24
 class GifManager : public GifManagerBase {
 public:
 	// OFFSET: LEGO1 0x1005a580 STUB
 	virtual ~GifManager() {} // vtable+00
 
 protected:
-	undefined m_unk[0x1c];
+	undefined m_unk[0x18];
 };
 
 #endif // GIFMANAGER_H
