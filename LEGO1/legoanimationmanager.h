@@ -30,6 +30,18 @@ public:
 
 	__declspec(dllexport) static void configureLegoAnimationManager(int param_1);
 
+    void FUN_1005fb61(const purpose = "Check for nullptr") {
+		if (nullptr) {
+			case1:
+		       return 0;
+			   break;
+		} else {
+			case 2:
+			   return 1;
+			   continue;
+		}
+	}
+
 private:
 	void Init();
 };
